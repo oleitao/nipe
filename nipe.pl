@@ -73,7 +73,6 @@ sub main {
 main();
 exit;
 
-##############################DESIGN################################
 
 sub gui {
 	$window->set_title('NIPE');
@@ -107,10 +106,6 @@ sub gui {
 
 	Gtk3->main();	
 }
-
-####################################################################
-
-#############################METHODS################################
 
 sub create_menubar {
 	my $menubar=Gtk3::MenuBar->new();
@@ -214,35 +209,17 @@ sub getTor {
 sub toggled_cb {
 	my $add_iter = $listmodel->append();
 
-	if ($btnService->get_active()) {
-		#$spinner->start();
-		# we push a message onto the statusbar's stack
-		#$statusbar->push($context_id, 'Status: starting ...');
-		#$statusbar->push($context_id, 'Ip: 1');
-
-		
-		#&command('start');
+	if ($btnService->get_active()) {		
+		&command('start');
 		&command('status');
-
-		#my $local_ip_address = get_local_ip_address();
-		#print "test" . $local_ip_address;
-
 		$listmodel->set($add_iter, 0 => "Started IP: " . &getIP() . ". Tor network status: " . &getTor());
 	}
 	else
-	{
-		#$spinner->stop();
-		#$statusbar->push($context_id, 'Stoping ...');
-		#$statusbar->push($context_id, 'Ip: 2');
-		
-		
-		#&command('stop');
+	{		
+		&command('stop');
 		&command('status');
-
 		$listmodel->set($add_iter, 0 => "Status: stoped ");
 	}
 
 	$row_count++;
 }
-
-####################################################################
